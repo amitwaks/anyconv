@@ -1,0 +1,47 @@
+{
+  "name": "anyconv",
+  "version": "1.0.0",
+  "description": "Convert anything from the command line — JSON, YAML, timestamps, base64, colors, bytes, number bases. Replace 50 ad-ridden converter websites with one CLI command.",
+  "type": "module",
+  "bin": {
+    "anyconv": "bin/cli.js"
+  },
+  "files": [
+    "bin/",
+    "dist/"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepublish": "npm run build",
+    "test": "node --test dist/*.test.js"
+  },
+  "keywords": [
+    "converter",
+    "cli",
+    "json",
+    "yaml",
+    "base64",
+    "timestamp",
+    "color",
+    "developer-tools"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amitwaks/anyconv.git"
+  },
+  "homepage": "https://github.com/amitwaks/anyconv",
+  "bugs": "https://github.com/amitwaks/anyconv/issues",
+  "funding": "https://github.com/sponsors/amitwaks",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^25.9.1",
+    "typescript": "^6.0.3"
+  }
+}
