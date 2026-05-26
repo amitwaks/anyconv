@@ -1,6 +1,6 @@
 {
   "name": "anyconv",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Convert anything from the command line — JSON, YAML, timestamps, base64, colors, bytes, number bases. Replace 50 ad-ridden converter websites with one CLI command.",
   "type": "module",
   "bin": {
