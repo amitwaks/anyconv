@@ -100,7 +100,8 @@ echo "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0" | anycon
 
 ### Figure out deployment sizes
 ```bash
-anyconv bytes $(stat -f%z dist/bundle.js)
+anyconv bytes $(node -e "console.log(require('fs').statSync('dist/bundle.js').size)")
+anyconv bytes $(wc -c < dist/bundle.js)     # macOS/Linux
 ```
 
 ### Quick color palette exploration
@@ -121,6 +122,7 @@ anyconv color "rgb(52, 152, 219)"
 | `anyconv color <value>` | Auto-detect hex/RGB — show all formats |
 | `anyconv color hex <hex>` | Explicit hex input |
 | `anyconv color rgb <r> <g> <b>` | Explicit RGB input |
+| `anyconv color hsl <h> <s> <l>` | Explicit HSL input |
 | `anyconv bytes <number>` | Byte count to all units |
 | `anyconv number <value>` | Decimal to hex, binary, octal |
 | `anyconv number hex <value>` | Parse as hexadecimal |

@@ -32,6 +32,7 @@ Commands:
     anyconv color <color>          Auto-detect and show all formats
     anyconv color hex <hex>        Convert hex to RGB/HSL
     anyconv color rgb <r> <g> <b>  Convert RGB to hex/HSL
+    anyconv color hsl <h> <s> <l>  Convert HSL to hex/RGB
 
   File sizes:
     anyconv bytes <number>         Convert bytes to all units
