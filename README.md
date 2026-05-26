@@ -157,7 +157,7 @@ PRs welcome! The converter modules live in `src/converters/` and are intentional
 
 ## License
 
-MIT — do whatever you want.
+MIT.
 
 ---
 
