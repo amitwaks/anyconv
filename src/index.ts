@@ -1,10 +1,16 @@
 import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, resolve } from 'node:path';
 import { jsonToYaml, yamlToJson } from './converters/json-yaml.js';
 import { convertTimestamp } from './converters/timestamp.js';
 import { base64Encode, base64Decode } from './converters/base64.js';
 import { convertColor } from './converters/color.js';
 import { convertBytes } from './converters/bytes.js';
 import { convertNumber } from './converters/number.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const VERSION = JSON.parse(readFileSync(resolve(__dirname, '../package.json'), 'utf-8')).version;
 
 const HELP = `anyconv — Convert anything from the command line
 
@@ -114,7 +120,7 @@ export function run(argv: string[]): void {
       case '--version':
       case '-v':
       case 'version': {
-        console.log('anyconv v1.0.0');
+        console.log(`anyconv v${VERSION}`);
         break;
       }
       default: {
