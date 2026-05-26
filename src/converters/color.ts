@@ -20,6 +20,28 @@ function parseRgb(r: number, g: number, b: number): { r: number; g: number; b: n
   return { r, g, b };
 }
 
+function parseHsl(h: number, s: number, l: number): { r: number; g: number; b: number } {
+  if (h < 0 || h > 360 || s < 0 || s > 100 || l < 0 || l > 100) {
+    throw new Error(`HSL values out of range. Got (${h}, ${s}%, ${l}%).`);
+  }
+  const sNorm = s / 100, lNorm = l / 100;
+  const c = (1 - Math.abs(2 * lNorm - 1)) * sNorm;
+  const x = c * (1 - Math.abs((h / 60) % 2 - 1));
+  const m = lNorm - c / 2;
+  let r1 = 0, g1 = 0, b1 = 0;
+  if (h < 60) { r1 = c; g1 = x; b1 = 0; }
+  else if (h < 120) { r1 = x; g1 = c; b1 = 0; }
+  else if (h < 180) { r1 = 0; g1 = c; b1 = x; }
+  else if (h < 240) { r1 = 0; g1 = x; b1 = c; }
+  else if (h < 300) { r1 = x; g1 = 0; b1 = c; }
+  else { r1 = c; g1 = 0; b1 = x; }
+  return {
+    r: Math.round((r1 + m) * 255),
+    g: Math.round((g1 + m) * 255),
+    b: Math.round((b1 + m) * 255),
+  };
+}
+
 function toHex(r: number, g: number, b: number): string {
   return '#' + [r, g, b].map(v => v.toString(16).padStart(2, '0')).join('');
 }
@@ -47,22 +69,31 @@ function toHsl(r: number, g: number, b: number): string {
 }
 
 function autoDetect(input: string): { r: number; g: number; b: number } {
+  if (!input) {
+    throw new Error('No color input provided. Use formats like "ff0000", "#ff0000", "rgb(255,0,0)", or "hsl(0,100%,50%)".');
+  }
+
   const cleaned = input.trim();
+
   if (/^#?[0-9a-fA-F]{3,8}$/.test(cleaned)) {
     return parseHex(cleaned);
   }
+
   const rgbMatch = cleaned.match(/^rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)$/);
   if (rgbMatch) {
     return parseRgb(parseInt(rgbMatch[1]), parseInt(rgbMatch[2]), parseInt(rgbMatch[3]));
   }
+
   const hslMatch = cleaned.match(/^hsl\s*\(\s*(\d+)\s*,\s*(\d+)%\s*,\s*(\d+)%\s*\)$/);
   if (hslMatch) {
-    return parseHex(cleaned); // fallback
+    return parseHsl(parseInt(hslMatch[1]), parseInt(hslMatch[2]), parseInt(hslMatch[3]));
   }
-  if (/^\d+$/.test(cleaned) && cleaned.length <= 3) {
+
+  if (/^\d{1,3}$/.test(cleaned)) {
     return parseHex(cleaned.padStart(6, '0'));
   }
-  return parseHex(cleaned.replace(/[^0-9a-fA-F]/g, ''));
+
+  throw new Error(`Could not detect color format: "${input}". Use hex ("ff0000"), rgb ("rgb(255,0,0)"), or hsl ("hsl(0,100%,50%)").`);
 }
 
 export function convertColor(input: string, format?: string, ...args: string[]): string {
@@ -73,8 +104,11 @@ export function convertColor(input: string, format?: string, ...args: string[]):
   } else if (format === 'rgb') {
     const r = parseInt(args[0] || input), g = parseInt(args[1]), b = parseInt(args[2]);
     rgb = parseRgb(r, g, b);
+  } else if (format === 'hsl') {
+    const h = parseInt(args[0] || input), s = parseInt(args[1]), l = parseInt(args[2]);
+    rgb = parseHsl(h, s, l);
   } else if (format) {
-    throw new Error(`Unknown color format: "${format}". Use "hex", "rgb", or omit for auto-detect.`);
+    throw new Error(`Unknown color format: "${format}". Use "hex", "rgb", "hsl", or omit for auto-detect.`);
   } else {
     rgb = autoDetect(input);
   }

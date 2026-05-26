@@ -58,11 +58,13 @@ export function run(argv: string[]): void {
     switch (cmd) {
       case 'json': {
         const input = rest.length > 0 ? readFile(rest[0]) : readStdin();
+        if (!input.trim()) throw new Error('No input provided. Pipe JSON data or pass a file path.');
         console.log(jsonToYaml(input));
         break;
       }
       case 'yaml': {
         const input = rest.length > 0 ? readFile(rest[0]) : readStdin();
+        if (!input.trim()) throw new Error('No input provided. Pipe YAML data or pass a file path.');
         console.log(yamlToJson(input));
         break;
       }

@@ -1,6 +1,18 @@
 export function convertTimestamp(input: string): string {
+  if (!input || input.trim() === '') {
+    throw new Error('Provide a Unix timestamp in seconds or milliseconds, or "now".');
+  }
+
   if (input === 'now') {
-    return `${Date.now()}\n${new Date().toISOString()}`;
+    const now = Date.now();
+    const results: string[] = [
+      `Unix (seconds):  ${Math.floor(now / 1000)}`,
+      `Unix (ms):       ${now}`,
+      `ISO 8601:        ${new Date().toISOString()}`,
+      `Locale string:   ${new Date().toLocaleString()}`,
+      `UTC string:      ${new Date().toUTCString()}`,
+    ];
+    return results.join('\n');
   }
 
   const num = Number(input);
