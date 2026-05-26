@@ -151,10 +151,6 @@ anyconv color "rgb(52, 152, 219)"
 | Bundle size | 4.8 kB | 2-5 MB of ads + tracking |
 | Speed | ~50ms | 2-5s (load + popups) |
 
-## Contributing
-
-PRs welcome! The converter modules live in `src/converters/` and are intentionally simple — each one is a self-contained function. Adding a new converter takes about 20 lines of code.
-
 ## License
 
 MIT.
