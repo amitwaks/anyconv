@@ -22,6 +22,7 @@ npx anyconv b64 encode "hello world"
 [![npm bundle size](https://img.shields.io/bundlephobia/minzip/anyconv?color=6C5CE7)](https://bundlephobia.com/package/anyconv)
 [![GitHub stars](https://img.shields.io/github/stars/amitwaks/anyconv?color=6C5CE7&style=flat)](https://github.com/amitwaks/anyconv)
 [![License: MIT](https://img.shields.io/badge/license-MIT-6C5CE7)](https://opensource.org/licenses/MIT)
+[![ko-fi](https://img.shields.io/badge/support-ko--fi-6C5CE7?logo=ko-fi)](https://ko-fi.com/amitwaks)
 
 ---
 
