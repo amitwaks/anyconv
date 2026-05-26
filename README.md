@@ -31,7 +31,7 @@ Every developer has been here: you need to convert a Unix timestamp, figure out 
 
 There's a better way.
 
-**anyconv is a single npm package that lives in your terminal.** It works offline. It respects your privacy. It's pipeable, scriptable, and composable with the rest of your toolchain. And it's **4.8 kB gzipped** — smaller than a single JPEG on those ad-heavy converter sites.
+**anyconv is a single npm package that lives in your terminal.** It works offline. It respects your privacy. It's pipeable, scriptable, and composable with the rest of your toolchain. And it's **5.5 kB gzipped** — smaller than a single JPEG on those ad-heavy converter sites.
 
 ## Features
 
@@ -148,7 +148,7 @@ anyconv color "rgb(52, 152, 219)"
 | Pipeable / scriptable | ✅ Yes | ❌ No |
 | Ad-free | ✅ Yes | ❌ 10-30 trackers per page |
 | CAPTCHA-free | ✅ Yes | ❌ "Are you human?" |
-| Bundle size | 4.8 kB | 2-5 MB of ads + tracking |
+| Bundle size | 5.5 kB | 2-5 MB of ads + tracking |
 | Speed | ~50ms | 2-5s (load + popups) |
 
 ## License
